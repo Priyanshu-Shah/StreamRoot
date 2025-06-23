@@ -1,0 +1,7 @@
+[submodule "buildroot"]
+	path = buildroot
+	url = https://git.buildroot.net/buildroot
+[submodule "linux-kernel"]
+	path = linux-kernel
+	url = https://github.com/raspberrypi/linux.git
+	branch = rpi-6.12.y
