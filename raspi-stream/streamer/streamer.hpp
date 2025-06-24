@@ -14,6 +14,10 @@ public:
     bool initialize();
     bool processFrame(const std::shared_ptr<libcamera::FrameBuffer> &buffer, const StreamInfo &info);
     void shutdown();
+    void setDestination(const std::string &url, int port) {
+        destination_url_ = url;
+        port_ = port;
+    }
 
 private:
     VideoOptions options_;
