@@ -1,10 +1,10 @@
-# Minimal Embedded Linux OS for Video Streaming on Raspberry Pi 3
+# Minimal Embedded Linux OS for Video Streaming on Raspberry Pi 4b
 
 ## 📌 Project Overview
 
 [Wiki Overview Page](https://github.com/Priyanshu-Shah/StreamRoot/wiki/Project-Overview)
 
-This project aims to create a **custom, headless embedded Linux distribution** using **Buildroot** for the **Raspberry Pi 3**. The OS is designed to **stream video** from the **Raspberry Pi Camera Module 3** with minimal resource usage (CPU, RAM, storage), in contrast to typical streaming setups like FFmpeg on Ubuntu.
+This project aims to create a **custom, headless embedded Linux distribution** using **Buildroot** for the **Raspberry Pi 4b**. The OS is designed to **stream video** from the **Raspberry Pi Camera Module 2** with minimal resource usage (CPU, RAM, storage), in contrast to typical streaming setups like FFmpeg on Ubuntu.
 
 > 🚀 Future Prospect: This base will eventually support a web-based dashboard for live video view, object tracking, and alert notifications.
 
