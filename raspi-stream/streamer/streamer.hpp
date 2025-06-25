@@ -2,30 +2,20 @@
 
 #include "core/stream_info.hpp"
 #include "core/video_options.hpp"
+
 #include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <netinet/in.h>
 
 class Streamer{
 public:
-    Streamer(const VideoOptions &options);
+    Streamer(const std::string &url, int port);
     ~Streamer();
-    bool initialize();
     bool processFrame(const std::shared_ptr<libcamera::FrameBuffer> &buffer, const StreamInfo &info);
-    void shutdown();
-    void setDestination(const std::string &url, int port) {
-        destination_url_ = url;
-        port_ = port;
-    }
 
 private:
-    VideoOptions options_;
-    std::unique_ptr<libcamera::Camera> camera_;
-    std::unique_ptr<libcamera::CameraManager> camera_manager_;
-    std::unique_ptr<libcamera::StreamConfiguration> config_;
-    bool initialized_ = false;
-
-    std::string destination_url_;
-    int port_;
+    int sockfd_;
+    struct sockaddr_in destination_addr_;
 }

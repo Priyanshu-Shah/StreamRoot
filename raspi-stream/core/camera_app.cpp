@@ -1,3 +1,19 @@
+/*
+
+This file is responsible for managing the camera application,
+firstly initializing the main camera class, which is the RPiCamApp,
+and then providing the necessary methods to handle camera operations
+like opening, closing, starting, and stopping the camera and coniguring video streams.
+
+The class also handles buffer management and request completion,
+i.e. maintain a queue of completed requests that can be processed by the application.
+mutex and condition variable are used to synchronize access to the queue in case of multiple threads accessing it.
+It also provides a method to wait method to the application, which blocks until a request is completed.
+
+The application uses the libcamera library to interface with the camera hardware,
+and it provides a way to access the video stream and its buffers.
+*/
+
 #include "core/camera_app.hpp"
 #include "core/video_options.hpp"
 
