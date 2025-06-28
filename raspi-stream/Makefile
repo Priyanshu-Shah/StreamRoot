@@ -13,7 +13,7 @@ SRCS := $(wildcard $(SRC_DIR)/*.cpp) \
 
 OBJS := $(SRCS:.cpp=.o)
 
-INCLUDES := -I. -I$(SRC_DIR) -I$(CORE_DIR) -I$(STREAMER_DIR)
+INCLUDES := -I. -I$(SRC_DIR) -I$(CORE_DIR) -I$(STREAMER_DIR) -I/usr/include/libcamera
 
 LIBS := -lpthread -lstdc++fs -lcamera
 
