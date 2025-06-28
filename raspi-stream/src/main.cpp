@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
     }
 
     cout << "Starting stream with resolution " << options.width << "x" << options.height
-         << ", destination: " << url << ":" << port << endl;
+         << ", destination: " << destination_url << ":" << port << endl;
 
 
     RPiCamApp cam;
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]){
     cam.startCamera();
 
     // Main loop to process video stream
-    Streamer streamer(url, port);
+    Streamer streamer(destination_url, port);
 
     while(true){
         auto req = cam.wait();

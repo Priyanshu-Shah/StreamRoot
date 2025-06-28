@@ -20,14 +20,14 @@ and it provides a way to access the video stream and its buffers.
 using namespace std;
 using namespace libcamera;
 
-RPICamApp::RPiCamApp() {
+RPiCamApp::RPiCamApp() {
     // Constructor implementation
     camera_started_ = false;
     openCamera();
     
 }
 
-RPICamApp::~RPiCamApp() {
+RPiCamApp::~RPiCamApp() {
     // Destructor implementation
     stopCamera();
     closeCamera();
@@ -60,14 +60,12 @@ void RPiCamApp::closeCamera() {
     }
 }
 
-void RPiCamApp::configureVideo(const VideoOptions &video_options) {
+void RPiCamApp::configureVideo(const VideoOptions &video_options_) {
     if(!camera_) {
         throw runtime_error("Camera not opened");
     }
 
-    StreamRoles roles = {
-        { StreamRole::VideoRecording, "video" }
-    };
+    std::vector<libcamera::StreamRole> roles = { libcamera::StreamRole::VideoRecording };
     config_ = camera_->generateConfiguration(roles);
     if (!config_) {
         throw runtime_error("Failed to generate configuration for video stream");
@@ -105,7 +103,7 @@ void RPiCamApp::stopCamera() {
     }
 }
 
-RPICamApp::Stream *RPICamApp::videoStream(StreamInfo *info) const {
+RPiCamApp::Stream *RPiCamApp::videoStream(StreamInfo *info) const {
     if (!stream_) {
         throw runtime_error("Video stream not configured");
     }
@@ -121,7 +119,7 @@ RPICamApp::Stream *RPICamApp::videoStream(StreamInfo *info) const {
     return stream_;
 }
 
-RPICamApp::CompletedRequestPtr RPICamApp::wait() {
+RPiCamApp::CompletedRequestPtr RPiCamApp::wait() {
     std::unique_lock<std::mutex> lock(queue_mutex_);
     queue_cv_.wait(lock, [this] { return !request_queue_.empty(); });
 
@@ -130,7 +128,7 @@ RPICamApp::CompletedRequestPtr RPICamApp::wait() {
     return request;
 }
 
-void RPICamApp::handleRequestComplete(CompletedRequestPtr request) {
+void RPiCamApp::handleRequestComplete(CompletedRequestPtr request) {
     std::lock_guard<std::mutex> lock(queue_mutex_);
     request_queue_.push(request);
     queue_cv_.notify_one();
